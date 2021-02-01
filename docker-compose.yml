@@ -1,0 +1,34 @@
+version: "3"
+
+networks:
+  task-api-network:
+    driver: bridge
+
+
+services:
+  db:
+    image: postgres
+    networks:
+      - task-api-network
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+      -
+  web:
+    networks:
+      - task-api-network
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: pjoaoricardo/task-api
+    volumes:
+      - .:/app/
+    ports:
+    - "8000:8000"
+    depends_on:
+      - db
+    working_dir: /app/api/
+    command: python manage.py runserver 0.0.0.0:8000
