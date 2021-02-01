@@ -3,29 +3,16 @@
 ## Ambiente
 ### requisitos
 - python 3.8+
-
-### passo a passo
-
-Criar A Venv
-
-`
-python3 -m venv .venv/
-`
-
-Entrar na venv
-
-`source .venv/bin/activate`
-
-
+- docker + docker compose 
 ## Execução
 
 Realizar as migrações
 
-`python manage.py migrate`
+`docker-compose run web /usr/local/bin/python manage.py migrate`
 
 Rodar o servidor
 
-`python manage.py runserver`
+`docker-compose up --build`
 
 ## End-points
 ###Usuario
